@@ -177,28 +177,30 @@ export default function CardList() {
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-center">Recreacionistas</h1>
-      <h4 className="text-xl text-center py-2">Encuentra el recreacionista ideal para tu evento</h4>
-      <CardFilters placeholder={"Filtra categorías"} options={categorias} onChange={(option: SelectOption[]) => {
-        setCategorias(option);
-        setProfiles(filterProfiles(option, genero));
-      }} />
-      <div className="py-2">
-        <Select placeholder={"Hombre o Mujer"}
-          options={generoOptions}
-          isClearable
-          onChange={(option) => {
-            if (option) {
-              setGenero(option.value);
-              setProfiles(filterProfiles(categoria, option.value));
-            }
+      <div className="py-4 max-w-5xl mx-auto">
+        <h1 className="text-4xl font-bold text-center">Recreacionistas</h1>
+        <h4 className="text-xl text-center py-2">Encuentra el recreacionista ideal para tu evento</h4>
+        <div className="max-w-lg mx-auto space-y-2">
+          <CardFilters placeholder={"Filtra categorías"} options={categorias} onChange={(option: SelectOption[]) => {
+            setCategorias(option);
+            setProfiles(filterProfiles(option, genero));
           }} />
-      </div>
-      <div className="text-left text-md text-gray-500">Resultados: {profiles.length} recreacionistas</div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {profiles.length ? profiles.map((profile) => (
-          <Card key={profile.id} name={profile.name} biography={profile.biography} image={profile.image} categorias={profile.categorias} />
-        )) : <div className="text-center text-2xl font-bold">No hay resultados</div>}
+          <Select placeholder={"Hombre o Mujer"}
+            options={generoOptions}
+            isClearable
+            onChange={(option) => {
+              if (option) {
+                setGenero(option.value);
+                setProfiles(filterProfiles(categoria, option.value));
+              }
+            }} />
+        </div>
+        <div className="text-left text-md text-gray-500">Resultados: {profiles.length} recreacionistas</div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {profiles.length ? profiles.map((profile) => (
+            <Card key={profile.id} name={profile.name} biography={profile.biography} image={profile.image} categorias={profile.categorias} />
+          )) : <div className="text-center text-2xl font-bold">No hay resultados</div>}
+        </div>
       </div>
     </>
   );
@@ -227,6 +229,9 @@ function Card({
           <span key={categoria.value} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{categoria.label}</span>
         ))}
       </div>
+      <a className="px-6 pt-4 pb-2 grid text-center" href="#">
+        <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Conocer más</span>
+      </a>
     </div>
   );
 }
