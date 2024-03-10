@@ -181,9 +181,11 @@ export default function CardList() {
         <h1 className="text-4xl font-bold text-center">Recreacionistas</h1>
         <h4 className="text-xl text-center py-2">Encuentra el recreacionista ideal para tu evento</h4>
         <div className="max-w-lg mx-auto space-y-2">
-          <CardFilters placeholder={"Filtra categorías"} options={categorias} onChange={(option: SelectOption[]) => {
-            setCategorias(option);
-            setProfiles(filterProfiles(option, genero));
+          <CardFilters placeholder={"Filtra categorías"} options={categorias} onChange={(option) => {
+            if (Array.isArray(option)) {
+              setCategorias(option);
+              setProfiles(filterProfiles(option, genero));
+            }
           }} />
           <Select placeholder={"Hombre o Mujer"}
             options={generoOptions}
