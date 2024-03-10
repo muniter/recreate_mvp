@@ -166,7 +166,6 @@ function filterProfiles(categorias: CategoriaOption[], genero?: string) {
 }
 
 const generoOptions = [
-  { label: 'Ambos', value: '' },
   { label: 'Hombre', value: 'M' },
   { label: 'Mujer', value: 'F' },
 ];
@@ -188,9 +187,11 @@ export default function CardList() {
         <Select placeholder={"Hombre o Mujer"}
           options={generoOptions}
           isClearable
-          onChange={(option: SelectOption) => {
-            setGenero(option.value);
-            setProfiles(filterProfiles(categoria, option.value));
+          onChange={(option) => {
+            if (option) {
+              setGenero(option.value);
+              setProfiles(filterProfiles(categoria, option.value));
+            }
           }} />
       </div>
       <div className="text-left text-md text-gray-500">Resultados: {profiles.length} recreacionistas</div>
